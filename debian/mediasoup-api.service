@@ -1,0 +1,14 @@
+[Unit]
+Description=@MediaSoup API
+After=network.target redis.service
+
+[Service]
+#EnvironmentFile=/etc/mediasoup-api/mediasoup-api.conf
+Type=simple
+User=mediasoup
+ExecStart=/usr/bin/node /usr/share/mediasoup-api/server.js
+WorkingDirectory=/usr/share/mediasoup-api
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
