@@ -1,0 +1,4 @@
+perl:Depends=perl:any
+shlibs:Depends=libc6 (>= 2.25), libgcc1 (>= 1:3.4), libstdc++6 (>= 5.2), libtinfo5 (>= 6), zlib1g (>= 1:1.2.0)
+misc:Depends=
+misc:Pre-Depends=

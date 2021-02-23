@@ -1,0 +1,15 @@
+#config/config.js          /etc/mediasoup-api/
+
+config          /usr/share/mediasoup-api/
+lib             /usr/share/mediasoup-api/
+node_modules    /usr/share/mediasoup-api/
+utils           /usr/share/mediasoup-api/
+certs           /usr/share/mediasoup-api/
+
+access.js       /usr/share/mediasoup-api/
+connect.js      /usr/share/mediasoup-api/
+httpHelper.js   /usr/share/mediasoup-api/
+permissions.js   /usr/share/mediasoup-api/
+package.json    /usr/share/mediasoup-api/
+server.js       /usr/share/mediasoup-api/
+userRoles.js    /usr/share/mediasoup-api/
