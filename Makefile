@@ -25,9 +25,7 @@ test:
 		@ npm run test
 
 clean:
-		echo "cleaning the dist directory"
-		@ rm -rf dist
-		@ rm -rf dist.tar.gz
+		@ rm -rf node_modules
 
 INFO := @bash -c '\
   printf $(YELLOW); \

@@ -69,28 +69,28 @@ module.exports =
 	// if you use encrypted private key the set the passphrase
 	tls          :
 	{
-		cert : `${__dirname}/../certs/mediasoup-demo.localhost.cert.pem`,
+		cert : process.env.CERT || `/etc/mediasoup-api/sample.localhost.cert.pem`,
 		// passphrase: 'key_password'
-		key  : `${__dirname}/../certs/mediasoup-demo.localhost.key.pem`
+		key  : process.env.KEY || `/etc/mediasoup-api/sample.localhost.key.pem`
 	},
 	// listening Host or IP 
 	// If omitted listens on every IP. ("0.0.0.0" and "::")
 	// listeningHost: 'localhost',
 	// Listening port for https server.
-	listeningPort         : 3443,
+	listeningPort         : process.env.LISTEN || 3380,
 	// Any http request is redirected to https.
 	// Listening port for http server.
-	listeningRedirectPort : 3443,
+	listeningRedirectPort : process.env.LISTEN_REDIRECT || 3480,
 	// Listens only on http, only on listeningPort
 	// listeningRedirectPort disabled
 	// use case: loadbalancer backend
-	httpOnly              : true,
+	httpOnly              : process.env.HTTP_ONLY || false,
 	// WebServer/Express trust proxy config for httpOnly mode
 	// You can find more info:
 	//  - https://expressjs.com/en/guide/behind-proxies.html
 	//  - https://www.npmjs.com/package/proxy-addr
 	// use case: loadbalancer backend
-	trustProxy            : '',
+	trustProxy            : process.env.TRUST_PROXY || '',
 	// This logger class will have the log function
 	// called every time there is a room created or destroyed,
 	// or peer created or destroyed. This would then be able
@@ -322,8 +322,8 @@ module.exports =
 				'srtp',
 				'rtcp'
 			],
-			rtcMinPort : 40000,
-			rtcMaxPort : 49999
+			rtcMinPort : process.env.RTC_MIN_PORT || 40000,
+			rtcMaxPort : process.env.RTC_MAX_PORT || 49999
 		},
 		// mediasoup Router settings.
 		router :
@@ -388,7 +388,7 @@ module.exports =
 			listenIps :
 			[
 				// change 192.0.2.1 IPv4 to your server's IPv4 address!!
-				{ ip: '192.168.1.9', announcedIp: null }
+				{ ip: process.env.PUBLIC_IP || '192.168.1.9', announcedIp: process.env.ANNOUNCED_IP || null }
 
 				// Can have multiple listening interfaces
 				// change 2001:DB8::1 IPv6 to your server's IPv6 address!!

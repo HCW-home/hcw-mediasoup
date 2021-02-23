@@ -1,10 +1,11 @@
-#config/config.js          /etc/mediasoup-api/
+debian/mediasoup-api.conf	    /etc/mediasoup-api/
+certs/sample.localhost.cert.pem /etc/mediasoup-api/
+certs/sample.localhost.key.pem  /etc/mediasoup-api/
 
 config          /usr/share/mediasoup-api/
 lib             /usr/share/mediasoup-api/
 node_modules    /usr/share/mediasoup-api/
 utils           /usr/share/mediasoup-api/
-certs           /usr/share/mediasoup-api/
 
 access.js       /usr/share/mediasoup-api/
 connect.js      /usr/share/mediasoup-api/
