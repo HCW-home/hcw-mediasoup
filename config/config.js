@@ -30,78 +30,15 @@ module.exports =
 {
 
 	// Auth conf
-	/*
+	
 	auth :
 	{
-		// Always enabled if configured
-		lti :
-		{
-			consumerKey    : 'key',
-			consumerSecret : 'secret'
-		},
-
-		// Auth strategy to use (default oidc)
-		strategy : 'oidc',
-		oidc :
-		{
-			// The issuer URL for OpenID Connect discovery
-			// The OpenID Provider Configuration Document
-			// could be discovered on:
-			// issuerURL + '/.well-known/openid-configuration'
-
-			// e.g. google OIDC config
-			// Follow this guide to get credential:  
-			// https://developers.google.com/identity/protocols/oauth2/openid-connect
-			// use this issuerURL
-			// issuerURL     : 'https://accounts.google.com/',
-			
-			issuerURL     : 'https://example.com',
-			clientOptions :
-			{
-				client_id     : '',
-				client_secret : '',
-				scope       		: 'openid email profile',
-				// where client.example.com is your edumeet server
-				redirect_uri  : 'https://client.example.com/auth/callback'
-			}
-
-		},
-		saml :
-		{
-			// where edumeet.example.com is your edumeet server
-			callbackUrl    : 'https://edumeet.example.com/auth/callback',
-			issuer         : 'https://edumeet.example.com',
-			entryPoint     : 'https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php',
-			privateCert    : fs.readFileSync('config/saml_privkey.pem', 'utf-8'),
-			signingCert    : fs.readFileSync('config/saml_cert.pem', 'utf-8'),
-			decryptionPvk  : fs.readFileSync('config/saml_privkey.pem', 'utf-8'),
-			decryptionCert : fs.readFileSync('config/saml_cert.pem', 'utf-8'),
-			// Federation cert
-			cert           : fs.readFileSync('config/federation_cert.pem', 'utf-8')
-		},
-
-		// to create password hash use: node server/utils/password_encode.js cleartextpassword
-		local :
-		{
-			users : [
-				{
-					id           : 1,
-					username     : 'alice',
-					passwordHash : '$2b$10$PAXXw.6cL3zJLd7ZX.AnL.sFg2nxjQPDmMmGSOQYIJSa0TrZ9azG6',
-					displayName  : 'Alice',
-					emails       : [ { value: 'alice@atlanta.com' } ]
-				},
-				{
-					id           : 2,
-					username     : 'bob',
-					passwordHash : '$2b$10$BzAkXcZ54JxhHTqCQcFn8.H6klY/G48t4jDBeTE2d2lZJk/.tvv0G',
-					displayName  : 'Bob',
-					emails       : [ { value: 'bob@biloxi.com' } ]
-				}
-			]
-		}
+	
+		username: process.env.API_USER,
+		secret: process.env.API_SECRET
+		
 	},
-	*/
+	
 	// URI and key for requesting geoip-based TURN server closest to the client
 	// turnAPIKey    : 'examplekey',
 	// turnAPIURI    : 'https://example.com/api/turn',
@@ -462,7 +399,7 @@ module.exports =
 			// Additional options that are not part of WebRtcTransportOptions.
 			maxIncomingBitrate              : 1500000
 		}
-	}
+	},
 
 	/*
 	,
@@ -475,4 +412,6 @@ module.exports =
 		quiet      : false // include fewer labels
 	}
 	*/
+
+	jwtSecret: '123'
 };
