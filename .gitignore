@@ -2,3 +2,4 @@ node_modules
 debian/mediasoup-api/
 yarn.lock
 debian/.debhelper/
+.env

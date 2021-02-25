@@ -34,8 +34,8 @@ module.exports =
 	auth :
 	{
 	
-		username: process.env.API_USER || "MEDIASOUP_USER",
-		secret: process.env.API_SECRET ||"123"
+		username: process.env.API_USER,
+		secret: process.env.API_SECRET 
 		
 	},
 	

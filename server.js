@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 process.title = 'edumeet-server';
+require('dotenv').config()
 
-const bcrypt = require('bcrypt');
+
 const config = require('./config/config');
 const fs = require('fs');
 const http = require('http');
@@ -264,6 +265,13 @@ async function runHttpsServer()
 		res.json({token})
 	
   });
+
+	app.get('/rooms-count', 
+	passport.authenticate('basic', { session: false }),
+	function(req, res) {
+		console.log('GET rooms ', rooms)
+		return res.json({count: rooms.size})
+	})
 
 	
 
