@@ -3,3 +3,4 @@ debian/mediasoup-api/
 yarn.lock
 debian/.debhelper/
 .env
+.vscode
