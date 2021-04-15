@@ -322,8 +322,8 @@ module.exports =
 				'srtp',
 				'rtcp'
 			],
-			rtcMinPort : process.env.RTC_MIN_PORT || 40000,
-			rtcMaxPort : process.env.RTC_MAX_PORT || 49999
+			rtcMinPort : (process.env.RTC_MIN_PORT && !Number.isNaN(process.env.RTC_MIN_PORT))? Number(process.env.RTC_MIN_PORT) : 40000,
+			rtcMaxPort : (process.env.RTC_MAX_PORT && !Number.isNaN(process.env.RTC_MAX_PORT))? Number(process.env.RTC_MAX_PORT) : 49999,
 		},
 		// mediasoup Router settings.
 		router :
