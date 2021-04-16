@@ -366,6 +366,10 @@ async function runWebSocketServer()
 
 			const room = await getOrCreateRoom({ roomId });
 
+			if(roomId.startsWith('test')&& room._allPeers.size>0){
+				socket.disconnect(true);
+				return;
+			}
 			let peer = peers.get(peerId);
 			let returning = false;
 
