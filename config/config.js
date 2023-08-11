@@ -42,6 +42,12 @@ if (process.env.TURN_SERVER2 && process.env.TURN_USERNAME2 && process.env.TURN_P
 		credential: process.env.TURN_PASSWORD2
 	});
 }
+
+const redisOptions = {
+	host: process.env.REDIS_HOST || 'localhost',
+	...(process.env.REDIS_PORT ? { port: process.env.REDIS_PORT } : {}),
+	...(process.env.REDIS_PASSWORD ? { password: process.env.REDIS_PASSWORD } : {})
+};
 module.exports =
 {
 
@@ -70,11 +76,7 @@ module.exports =
 	// bittorrent tracker
 	fileTracker  : 'wss://tracker.lab.vvc.niif.hu:443',
 	// redis server options
-	redisOptions : {
-		host: process.env.REDIS_HOST || 'localhost',
-		port: process.env.REDIS_PORT || 6379,
-		password: process.env.REDIS_PASSWORD || undefined,
-	},
+	redisOptions,
 	// session cookie secret
 	cookieSecret : 'T0P-S3cR3t_cook!e',
 	cookieName   : 'edumeet.sid',
