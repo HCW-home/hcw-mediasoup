@@ -1,3 +1,26 @@
+mediasoup-api (0.9.4) bionic; urgency=medium
+
+  [ Muhammed ]
+  *  only one user per test room
+
+  [ Olivier Bitsch ]
+  * New helper python for Nagios
+  * Dockerization
+
+  [ Gor Grigoryan ]
+  * backupTurnServers env change
+
+  [ Olivier Bitsch ]
+  * New var to configure Redis
+  * Copy sample certificates to correct path
+  * Add new var for turn servers
+  * Fix redis config if password is not defined
+
+  [ Gor Grigoryan ]
+  * change redis options
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Fri, 11 Aug 2023 15:30:56 +0200
+
 mediasoup-api (0.9.3) bionic; urgency=medium
 
   * Fix RTC value
