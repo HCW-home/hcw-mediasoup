@@ -70,7 +70,11 @@ module.exports =
 	// bittorrent tracker
 	fileTracker  : 'wss://tracker.lab.vvc.niif.hu:443',
 	// redis server options
-	redisOptions : {},
+	redisOptions : {
+		host: process.env.REDIS_HOST || 'localhost',
+		port: process.env.REDIS_PORT || 6379,
+		password: process.env.REDIS_PASSWORD || '',
+	},
 	// session cookie secret
 	cookieSecret : 'T0P-S3cR3t_cook!e',
 	cookieName   : 'edumeet.sid',
