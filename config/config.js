@@ -73,7 +73,7 @@ module.exports =
 	redisOptions : {
 		host: process.env.REDIS_HOST || 'localhost',
 		port: process.env.REDIS_PORT || 6379,
-		password: process.env.REDIS_PASSWORD || '',
+		password: process.env.REDIS_PASSWORD || undefined,
 	},
 	// session cookie secret
 	cookieSecret : 'T0P-S3cR3t_cook!e',
