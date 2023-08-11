@@ -26,6 +26,22 @@ const {
 // const AwaitQueue = require('awaitqueue');
 // const axios = require('axios');
 
+const backupTurnServers = [];
+if (process.env.TURN_SERVER1 && process.env.TURN_USERNAME1 && process.env.TURN_PASSWORD1) {
+	backupTurnServers.push({
+		urls: [process.env.TURN_SERVER1],
+		username: process.env.TURN_USERNAME1,
+		credential: process.env.TURN_PASSWORD1
+	});
+}
+
+if (process.env.TURN_SERVER2 && process.env.TURN_USERNAME2 && process.env.TURN_PASSWORD2) {
+	backupTurnServers.push({
+		urls: [process.env.TURN_SERVER2],
+		username: process.env.TURN_USERNAME2,
+		credential: process.env.TURN_PASSWORD2
+	});
+}
 module.exports =
 {
 
@@ -50,15 +66,7 @@ module.exports =
 	// },
 	// turnAPITimeout    : 2 * 1000,
 	// Backup turnservers if REST fails or is not configured
-	// backupTurnServers : [
-	// 	{
-	// 		urls : [
-	// 			'turn:turn.example.com:443?transport=tcp'
-	// 		],
-	// 		username   : 'example',
-	// 		credential : 'example'
-	// 	}
-	// ],
+	backupTurnServers: backupTurnServers,
 	// bittorrent tracker
 	fileTracker  : 'wss://tracker.lab.vvc.niif.hu:443',
 	// redis server options
