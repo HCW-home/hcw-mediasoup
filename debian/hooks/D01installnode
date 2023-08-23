@@ -1,6 +1,6 @@
 #!/bin/sh
 ## Adapt according to you build environment.
-VERSION=node_10.x
+VERSION=node_16.x
 DISTRO=buster
 
 set -e
