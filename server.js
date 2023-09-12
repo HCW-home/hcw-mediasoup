@@ -91,17 +91,23 @@ const tls =
 const app = express();
 
 var whitelist = [
-	'http://localhost:4200',
-	'https://localhost:443',
-	'http://localhost',
-	'https://localhost',
-	'http://localhost:8100',
-	'http://localhost:8080',
-	'http://192.168.1.9:4200',
-	'https://dev-medecin-hug-at-home.oniabsis.com',
-	'https://dev-patient-hug-at-home.oniabsis.com',
-	'https://conferences.iabsis.com'
+	'http://localhost'
 ]
+
+const whitelistEnv = process.env.WHITELIST_FRONT_URLS; 
+
+if (whitelistEnv) {
+  const whitelistValues = whitelistEnv.split(',');
+
+  whitelistValues.forEach(value => {
+    if (value.trim() !== '') {
+      whitelist.push(value.trim());
+    }
+  });
+}
+
+console.log("Whitelisted URL: ", whitelist);
+
 var corsOptions = {
   origin: function (origin, callback) {
 		console.log('%cserver.js line:93 Cors check origin', 'color: #007acc;', origin);
