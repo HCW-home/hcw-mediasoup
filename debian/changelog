@@ -1,3 +1,14 @@
+mediasoup-api (0.9.5) bionic; urgency=medium
+
+  * Rebuild with node 16
+  * Add missing dependancy
+  * Remove test during build
+  * Add option to whitelist Front when not behind reverse proxy
+  * New script for starting local dev
+  * Configuring Whitelist from global vars
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Thu, 14 Sep 2023 10:03:46 +0200
+
 mediasoup-api (0.9.4) bionic; urgency=medium
 
   [ Muhammed ]
