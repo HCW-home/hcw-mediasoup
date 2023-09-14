@@ -90,11 +90,11 @@ const tls =
 
 const app = express();
 
-var whitelist = [
+const whitelist = [
 	'http://localhost'
-]
+];
 
-const whitelistEnv = process.env.WHITELIST_FRONT_URLS; 
+const whitelistEnv = process.env.WHITELIST_FRONT_URLS;
 
 if (whitelistEnv) {
   const whitelistValues = whitelistEnv.split(',');
@@ -334,6 +334,7 @@ async function runWebSocketServer()
 		let decoded;
 		let roomId;
 		let peerId
+
 		try {
 			
 			decoded = jwt.verify(authToken, config.jwtSecret);
@@ -342,14 +343,16 @@ async function runWebSocketServer()
 
 		} catch (error) {
 			
+			console.log('Disconnect due to:', error);
 			socket.disconnect(true);
 			return;
 		}
 
+
 		
-		const { token } = socket.handshake.session;
+		const { token } = socket.handshake.query;
 		if (!token) {
-			console.log("No token ");
+			console.log("No token");
 		} else {
 			console.log("token", token);
 		}
@@ -372,10 +375,11 @@ async function runWebSocketServer()
 
 			const room = await getOrCreateRoom({ roomId });
 
-			if(roomId.startsWith('test')&& room._allPeers.size>0){
-				socket.disconnect(true);
-				return;
-			}
+			// if(roomId.startsWith('test')&& room._allPeers.size>0){
+			// 	socket.disconnect(true);
+			// 	return;
+			// }
+
 			let peer = peers.get(peerId);
 			let returning = false;
 
@@ -481,16 +485,20 @@ async function runMediasoupWorkers()
  */
 async function getOrCreateRoom({ roomId })
 {
+	console.log("roomId", roomId);
 	let room = rooms.get(roomId);
+
 
 	// If the Room does not exist create a new one.
 	if (!room)
 	{
-		logger.info('creating a new Room [roomId:"%s"]', roomId);
+		console.log('creating a new Room [roomId:"%s"]', roomId);
 
 		// const mediasoupWorker = getMediasoupWorker();
 
 		room = await Room.create({ mediasoupWorkers, roomId, peers });
+
+		console.log('room', room);
 
 		rooms.set(roomId, room);
 
