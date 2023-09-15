@@ -1,3 +1,10 @@
+mediasoup-api (0.9.7) bionic; urgency=medium
+
+  * * Update temporary Dockerfile
+  * Add lock
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Sat, 16 Sep 2023 01:14:50 +0200
+
 mediasoup-api (0.9.6) bionic; urgency=medium
 
   * Remove redis dependancy
