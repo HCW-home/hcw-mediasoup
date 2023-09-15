@@ -1,3 +1,9 @@
+mediasoup-api (0.9.8) bionic; urgency=medium
+
+  * Switch to npm to build
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Sat, 16 Sep 2023 01:23:51 +0200
+
 mediasoup-api (0.9.7) bionic; urgency=medium
 
   * * Update temporary Dockerfile
