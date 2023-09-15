@@ -6,8 +6,8 @@ timeStamp:=$(shell date +%Y%m%d%H%M%S)
 .PHONY: install build archive test clean
 
 build:
-		@ PYTHON=python3 npx yarn install
-#		@ npm install
+#		@ PYTHON=python3 npx yarn install
+		@ npm install
 
 show:
 		@ echo Timestamp: "$(timeStamp)"
