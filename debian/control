@@ -11,6 +11,6 @@ Rules-Requires-Root: no
 
 Package: mediasoup-api
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, redis-server, nodejs
+Depends: ${shlibs:Depends}, ${misc:Depends}, nodejs
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>
