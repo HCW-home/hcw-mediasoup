@@ -14,3 +14,4 @@ permissions.js   /usr/share/mediasoup-api/
 package.json    /usr/share/mediasoup-api/
 server.js       /usr/share/mediasoup-api/
 userRoles.js    /usr/share/mediasoup-api/
+package-lock.json /usr/share/mediasoup-api/

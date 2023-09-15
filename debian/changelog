@@ -1,8 +1,8 @@
-mediasoup-api (0.9.8) bullseye; urgency=medium
+mediasoup-api (0.9.9) bullseye; urgency=medium
 
   * Switch to npm to build
 
- -- Olivier Bitsch <olivier.b@iabsis.com>  Sat, 16 Sep 2023 01:23:51 +0200
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Sat, 16 Sep 2023 01:34:57 +0200
 
 mediasoup-api (0.9.7) bionic; urgency=medium
 
