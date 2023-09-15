@@ -1,4 +1,4 @@
-mediasoup-api (0.9.8) bionic; urgency=medium
+mediasoup-api (0.9.8) bullseye; urgency=medium
 
   * Switch to npm to build
 
