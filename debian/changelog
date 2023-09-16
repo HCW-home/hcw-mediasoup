@@ -1,3 +1,9 @@
+mediasoup-api (0.9.10) bullseye; urgency=medium
+
+  * Add rules to build with docker
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Sat, 16 Sep 2023 02:03:14 +0200
+
 mediasoup-api (0.9.9) bullseye; urgency=medium
 
   * Switch to npm to build
