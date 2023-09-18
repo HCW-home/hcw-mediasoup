@@ -1,3 +1,9 @@
+mediasoup-api (0.9.13) bullseye; urgency=medium
+
+  * Attempt to fix build issue
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Mon, 18 Sep 2023 10:22:38 +0200
+
 mediasoup-api (0.9.12) bullseye; urgency=medium
 
   * Update mediasoup
