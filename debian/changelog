@@ -1,4 +1,4 @@
-mediasoup-api (0.9.10) bullseye; urgency=medium
+mediasoup-api (0.9.11) bullseye; urgency=medium
 
   * Add rules to build with docker
 

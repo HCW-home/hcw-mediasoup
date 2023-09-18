@@ -1,2 +1,4 @@
 builder:
 - method: pbuilder
+  options:
+    dist: bullseye
