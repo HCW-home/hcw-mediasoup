@@ -6,26 +6,30 @@ timeStamp:=$(shell date +%Y%m%d%H%M%S)
 .PHONY: install build archive test clean
 
 build:
-#		@ PYTHON=python3 npx yarn install
-		@ npm install
+#	@ PYTHON=python3 npx yarn install
+	@ npm install
+
+# This is to try fixing build issue
+	@ npm uninstall mediasoup
+	@ npm install mediasoup@3.7.1
 
 show:
-		@ echo Timestamp: "$(timeStamp)"
-		@ echo Node Version: $(node_version)
-		@ echo npm_version: $(npm_version)
+	@ echo Timestamp: "$(timeStamp)"
+	@ echo Node Version: $(node_version)
+	@ echo npm_version: $(npm_version)
 
 install:
-		@ echo "Managed externally"
+	@ echo "Managed externally"
 
 archive:
-		@ tar -czvf "dosetup-$(timeStamp).tar.gz" dist
+	@ tar -czvf "dosetup-$(timeStamp).tar.gz" dist
 
 test:
-		echo "test the app"
+	echo "test the app"
 #		@ npm run test
 
 clean:
-		@ rm -rf node_modules
+	@ rm -rf node_modules
 
 INFO := @bash -c '\
   printf $(YELLOW); \
