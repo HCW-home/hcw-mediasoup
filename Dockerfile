@@ -1,13 +1,19 @@
-FROM debian:bullseye AS builder
-RUN apt update && apt install -y ca-certificates
-RUN echo deb [trusted=yes] https://projects.iabsis.com/repository/mediasoup-api/debian bionic main > /etc/apt/sources.list.d/mediasoup.list
-RUN apt-get update && apt install -y mediasoup-api
-
+FROM node:16-bullseye-slim AS builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN apt-get update && apt install -y python3-pip build-essential python openssl libssl-dev pkg-config
+#RUN PYTHON=python3 npx yarn install
+RUN npm i
+COPY *.js .
+COPY config/ config/
+COPY lib/ lib/
+COPY utils/ utils/
+COPY certs/ certs/
 
 FROM node:16-bullseye-slim
 
 WORKDIR /usr/src/app
-COPY --from=builder /usr/share/mediasoup-api/ /usr/src/app/
+COPY --from=builder /usr/src/app/ /usr/src/app/
 
 EXPOSE 3380
 CMD [ "node", "server.js" ]

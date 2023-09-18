@@ -1,0 +1,59 @@
+services:
+  backend:
+    image: docker.io/iabsis/mediasoup-api
+    ports:
+      - "3443:3443"
+      - "3380:3380"
+
+    environment:
+      - JWT_SECRET=aadsrwerrf
+
+      ## Configure credentials used to consume mediasoup API
+      - API_USER=abcd
+      - API_SECRET=1234
+
+      ## Define here the public IP server
+      - PUBLIC_IP=192.168.3.143
+
+      ## If server is behind nat, you might need to advertise
+      # the real public IP by commenting out this line.
+      - ANNOUNCED_IP=82.64.225.185
+
+      ## You will need to open UDP port in the follow range, you
+      # can adjust the range if required.
+      - RTC_MIN_PORT=40000
+      - RTC_MAX_PORT=49000
+
+      ## If this server is behind a reverse proxy, you might need to trust it
+      - TRUST_PROXY=127.0.0.1
+
+      ## The best practice is to use reverse proxy, but if you want
+      # this API to serve directly HTTPS, you might need to configure the
+      # following lines
+      - HTTP_ONLY=false
+      - LISTEN=3443
+      #- CERT=/usr/src/app/certs/sample.localhost.cert.pem
+      #- KEY=/usr/src/app/certs/sample.localhost.key.pem
+      - CERT=/etc/mediasoup-api/certs/live/ms1.ipv6.dev.oniabsis.com/fullchain.pem
+      - KEY=/etc/mediasoup-api/certs/live/ms1.ipv6.dev.oniabsis.com/privkey.pem
+      # - LISTEN_REDIRECT=80
+
+      ## Redis server
+      - REDIS_HOST=localhost
+      - WHITELIST_FRONT_URLS=https://doctor_hcw-athome.dev.oniabsis.com,https://patient_hcw-athome.dev.oniabsis.com
+
+      - TURN_SERVER1=turn:demo.hcw-at-home.com
+      - TURN_USERNAME1=iabsis
+      - TURN_PASSWORD1=pfcqopfs
+      - DEBUG=*
+
+    depends_on:
+      - redis
+    volumes:
+      - ./data/certbot/:/etc/mediasoup-api/certs
+    network_mode: "host"
+    entrypoint: sleep 36000
+
+  redis:
+    image: redis
+    network_mode: "host"
