@@ -9,10 +9,6 @@ build:
 #	@ PYTHON=python3 npx yarn install
 	@ npm install
 
-# This is to try fixing build issue
-	@ npm uninstall mediasoup
-	@ npm install mediasoup@3.7.1
-
 show:
 	@ echo Timestamp: "$(timeStamp)"
 	@ echo Node Version: $(node_version)
