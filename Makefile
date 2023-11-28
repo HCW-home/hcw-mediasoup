@@ -24,6 +24,12 @@ test:
 	echo "test the app"
 #		@ npm run test
 
+docker:
+	@ docker build -t docker.io/iabsis/mediasoup-api .
+
+podman:
+	@ podman build -t docker.io/iabsis/mediasoup-api .
+
 clean:
 	@ rm -rf node_modules
 

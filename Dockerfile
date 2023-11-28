@@ -12,8 +12,10 @@ COPY certs/ certs/
 
 FROM node:16-bullseye-slim
 
+RUN adduser --system mediasoup
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app/ /usr/src/app/
+USER mediasoup
 
 EXPOSE 3380
 CMD [ "node", "server.js" ]
