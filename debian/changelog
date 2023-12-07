@@ -1,3 +1,14 @@
+mediasoup-api (0.9.15) bullseye; urgency=medium
+
+  * Remove useless command
+  * Fix build dockerfile to use package-lock
+  * Fix local dev start
+  * New podman build in Makefile + Dockerfile unprivileaged
+  * Adding healthcheck
+  * Remove useless log
+
+ -- Olivier Bitsch <olivier.b@iabsis.com>  Thu, 07 Dec 2023 13:35:03 +0100
+
 mediasoup-api (0.9.14) bullseye; urgency=medium
 
   * Fix package-lock usage
