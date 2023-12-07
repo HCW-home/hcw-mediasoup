@@ -261,6 +261,9 @@ async function runHttpsServer()
 
 	app.use('/.well-known/acme-challenge', express.static('public/.well-known/acme-challenge'));
 
+	app.get('/healthcheck', (req, res) => {
+		res.status(200).json({message: "Health OK"});
+	});
 	
 	app.post('/session',
 	passport.authenticate('basic', { session: false }),
