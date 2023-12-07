@@ -110,7 +110,6 @@ console.log("Whitelisted URL: ", whitelist);
 
 var corsOptions = {
   origin: function (origin, callback) {
-		console.log('%cserver.js line:93 Cors check origin', 'color: #007acc;', origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
