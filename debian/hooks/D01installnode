@@ -1,6 +1,6 @@
 #!/bin/sh
 ## Adapt according to you build environment.
-VERSION=node_16.x
+VERSION=node_20.x
 DISTRO=bullseye
 
 set -e

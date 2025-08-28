@@ -1,4 +1,4 @@
-mediasoup-api (0.9.16) bullseye; urgency=medium
+mediasoup-api (0.10.0) bookworm; urgency=medium
 
   * Force repository refresh
 
