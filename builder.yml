@@ -1,4 +1,12 @@
-builder:
-- method: pbuilder
-  options:
-    dist: bullseye
+flows:
+  - podman
+  - deb
+  - publish-github
+  - sonar
+options:
+  distrib: "debian"
+  codename: "bookworm"
+  external_git_url: "git@github.com:HCW-home/hcw-mediasoup.git"
+modes:
+  - ON_VERSION
+  - ON_TAG
