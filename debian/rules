@@ -27,3 +27,6 @@
 #override_dh_auto_install:
 #	dh_auto_install
 #	ln -sf debian/mediasoup-api/usr/share/mediasoup-api/config /etc/mediasoup-api/
+
+override_dh_strip:
+	echo "Bypass dh_strip"
