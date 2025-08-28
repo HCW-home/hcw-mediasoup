@@ -52,6 +52,6 @@
 		"uuid": "^11.1.0"
 	},
 	"devDependencies": {
-		"eslint": "^9.15.0"
+		"eslint": "^8.57.0"
 	}
 }
