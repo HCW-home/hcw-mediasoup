@@ -9,7 +9,7 @@ COPY config/ config/
 COPY lib/ lib/
 COPY utils/ utils/
 COPY certs/ certs/
-ENV version = 0.10.5
+ENV VERSION=0.10.5
 
 FROM node:20-bookworm-slim
 
