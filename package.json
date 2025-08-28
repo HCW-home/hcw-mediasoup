@@ -47,7 +47,7 @@
 		"pidusage": "^4.0.1",
 		"prom-client": "^15.1.3",
 		"redis": "^5.8.2",
-		"socket.io": "^4.8.1",
+		"socket.io": "^3.0.5",
 		"spdy": "^4.0.1",
 		"uuid": "^11.1.0"
 	},
