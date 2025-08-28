@@ -1,7 +1,7 @@
 FROM node:20-bookworm-slim AS builder
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN apt-get update && apt install -y python3-pip build-essential python openssl libssl-dev pkg-config
+RUN apt-get update && apt install -y python3-pip build-essential openssl libssl-dev pkg-config
 #RUN PYTHON=python3 npx yarn install
 RUN npm i
 COPY *.js .
