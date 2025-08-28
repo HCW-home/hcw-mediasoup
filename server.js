@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 process.title = 'edumeet-server';
-require('dotenv').config()
-
+require('dotenv').config();
 
 const config = require('./config/config');
 const fs = require('fs');
@@ -13,33 +12,30 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const mediasoup = require('mediasoup');
-const AwaitQueue = require('awaitqueue');
+const { AwaitQueue } = require('awaitqueue');
 const Logger = require('./lib/Logger');
 const Room = require('./lib/Room');
 const Peer = require('./lib/Peer');
-const base64 = require('base-64');
 const helmet = require('helmet');
-const userRoles = require('./userRoles');
-const {
-	loginHelper,
-	logoutHelper
-} = require('./httpHelper');
 // auth
 const passport = require('passport');
-const LTIStrategy = require('passport-lti');
-const imsLti = require('ims-lti');
-const SAMLStrategy = require('passport-saml').Strategy;
-const LocalStrategy = require('passport-local').Strategy;
 const redis = require('redis');
-const redisClient = redis.createClient(config.redisOptions);
-const { Issuer, Strategy } = require('openid-client');
+const redisClient = redis.createClient({
+	socket : {
+		host : config.redisOptions.host,
+		port : config.redisOptions.port
+	},
+	password : config.redisOptions.password
+});
+
+redisClient.connect().catch(console.error);
 const expressSession = require('express-session');
-const RedisStore = require('connect-redis')(expressSession);
+const { RedisStore } = require('connect-redis');
 const sharedSession = require('express-socket.io-session');
 const interactiveServer = require('./lib/interactiveServer');
 const promExporter = require('./lib/promExporter');
 const { v4: uuidv4 } = require('uuid');
-var cors = require('cors')
+const cors = require('cors');
 const BasicStrategy = require('passport-http').BasicStrategy;
 const jwt = require('jsonwebtoken');
 
@@ -74,7 +70,7 @@ const tls =
 	cert          : fs.readFileSync(config.tls.cert),
 	key           : fs.readFileSync(config.tls.key),
 	secureOptions : 'tlsv12',
-	ciphers       :
+	ciphers :
 		[
 			'ECDHE-ECDSA-AES128-GCM-SHA256',
 			'ECDHE-RSA-AES128-GCM-SHA256',
@@ -96,32 +92,41 @@ const whitelist = [
 
 const whitelistEnv = process.env.WHITELIST_FRONT_URLS;
 
-if (whitelistEnv) {
-  const whitelistValues = whitelistEnv.split(',');
+if (whitelistEnv)
+{
+	const whitelistValues = whitelistEnv.split(',');
 
-  whitelistValues.forEach(value => {
-    if (value.trim() !== '') {
-      whitelist.push(value.trim());
-    }
-  });
+	whitelistValues.forEach((value) =>
+	{
+		if (value.trim() !== '')
+		{
+			whitelist.push(value.trim());
+		}
+	});
 }
 
-console.log("Whitelisted URL: ", whitelist);
+console.log('Whitelisted URL: ', whitelist);
 
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(null, true)
-    }
+const corsOptions = {
+	origin : function(origin, callback)
+	{
+		if (whitelist.indexOf(origin) !== -1)
+		{
+			callback(null, true);
+		}
+		else
+		{
+			callback(null, true);
+		}
 	},
-	credentials: true
-}
+	credentials : true
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 // app.use(cors())
-app.use(helmet.hsts());
+app.use(helmet({
+	hsts : true
+}));
 const sharedCookieParser=cookieParser();
 
 app.use(sharedCookieParser);
@@ -200,7 +205,8 @@ async function run()
 		const errorHandler = (err, req, res, next) =>
 		{
 			const trackingId = uuidv4();
-			console.log('Error ', err)
+
+			console.log('Error ', err);
 			res.status(500).send(
 				`<h1>Internal Server Error</h1>
 				<p>If you report this error, please also report this 
@@ -233,18 +239,19 @@ function statusLog()
 	}
 }
 
-
-
-
 async function setupAuth()
 {
 
 	passport.use(new BasicStrategy(
-		function(username, password, done) {
-			if(username === config.auth.username && password === config.auth.secret){
-				return done(null, {username});
-			}else{
-				return done(null, false); 
+		function(username, password, done)
+		{
+			if (username === config.auth.username && password === config.auth.secret)
+			{
+				return done(null, { username });
+			}
+			else
+			{
+				return done(null, false);
 			}
 		}
 	));
@@ -260,28 +267,31 @@ async function runHttpsServer()
 
 	app.use('/.well-known/acme-challenge', express.static('public/.well-known/acme-challenge'));
 
-	app.get('/healthcheck', (req, res) => {
-		res.status(200).json({message: "Health OK"});
+	app.get('/healthcheck', (req, res) =>
+	{
+		res.status(200).json({ message: 'Health OK' });
 	});
-	
+
 	app.post('/session',
-	passport.authenticate('basic', { session: false }),
-	function(req, res) {
-    
-		const token = jwt.sign({ peerId: req.body.peerId, roomId: req.body.roomId}, config.jwtSecret);
-		console.log('Created token for ', req.body.peerId)
-		res.json({token})
-	
-  });
+		passport.authenticate('basic', { session: false }),
+		function(req, res)
+		{
 
-	app.get('/rooms-count', 
-	passport.authenticate('basic', { session: false }),
-	function(req, res) {
-		console.log('GET rooms ', rooms)
-		return res.json({count: rooms.size})
-	})
+			const token = jwt.sign({ peerId: req.body.peerId, roomId: req.body.roomId }, config.jwtSecret);
 
-	
+			console.log('Created token for ', req.body.peerId);
+			res.json({ token });
+
+		});
+
+	app.get('/rooms-count',
+		passport.authenticate('basic', { session: false }),
+		function(req, res)
+		{
+			console.log('GET rooms ', rooms);
+
+			return res.json({ count: rooms.size });
+		});
 
 	if (config.httpOnly === true)
 	{
@@ -309,7 +319,6 @@ async function runHttpsServer()
 		mainListener.listen(config.listeningPort);
 }
 
-
 /**
  * Create a WebSocketServer to allow WebSocket connections from browsers.
  */
@@ -325,38 +334,46 @@ async function runWebSocketServer()
 	// Handle connections from clients.
 	io.on('connection', (socket) =>
 	{
-	
-		
+
 		const authToken = socket.handshake.query.token;
-		if(!authToken){
+
+		if (!authToken)
+		{
 			socket.disconnect(true);
+
 			return;
 		}
 
 		let decoded;
 		let roomId;
-		let peerId
+		let peerId;
 
-		try {
-			
+		try
+		{
+
 			decoded = jwt.verify(authToken, config.jwtSecret);
-			roomId = decoded.roomId
-			peerId = decoded.peerId
+			roomId = decoded.roomId;
+			peerId = decoded.peerId;
 
-		} catch (error) {
-			
+		}
+		catch (error)
+		{
+
 			console.log('Disconnect due to:', error);
 			socket.disconnect(true);
+
 			return;
 		}
 
-
-		
 		const { token } = socket.handshake.query;
-		if (!token) {
-			console.log("No token");
-		} else {
-			console.log("token", token);
+
+		if (!token)
+		{
+			console.log('No token');
+		}
+		else
+		{
+			console.log('token', token);
 		}
 
 		if (!roomId || !peerId)
@@ -487,9 +504,8 @@ async function runMediasoupWorkers()
  */
 async function getOrCreateRoom({ roomId })
 {
-	console.log("roomId", roomId);
+	console.log('roomId', roomId);
 	let room = rooms.get(roomId);
-
 
 	// If the Room does not exist create a new one.
 	if (!room)
